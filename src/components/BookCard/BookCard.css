@@ -1,0 +1,112 @@
+.book-card {
+  display: flex;
+  min-height: 230px;
+  overflow: hidden;
+  border: 1px solid #e3e9e5;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgb(32 67 52 / 6%);
+  text-align: left;
+}
+
+.book-card__cover {
+  display: grid;
+  width: 116px;
+  flex: 0 0 116px;
+  place-items: center;
+  background:
+    radial-gradient(circle at 25% 20%, rgb(255 255 255 / 25%), transparent 34%),
+    linear-gradient(145deg, #276d59, #123f39);
+  color: #fff;
+}
+
+.book-card:nth-child(3n + 2) .book-card__cover {
+  background:
+    radial-gradient(circle at 25% 20%, rgb(255 255 255 / 28%), transparent 34%),
+    linear-gradient(145deg, #c17a49, #784735);
+}
+
+.book-card:nth-child(3n) .book-card__cover {
+  background:
+    radial-gradient(circle at 25% 20%, rgb(255 255 255 / 28%), transparent 34%),
+    linear-gradient(145deg, #6f7894, #3f4762);
+}
+
+.book-card__cover-mark {
+  border-block: 1px solid rgb(255 255 255 / 60%);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  padding: 0.45rem 0;
+  transform: rotate(-90deg);
+}
+
+.book-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.25rem;
+}
+
+.book-card__genre {
+  color: #176b55;
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.book-card__title {
+  margin: 0.45rem 0 0.25rem;
+  color: #24352e;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.book-card__author {
+  color: #63746b;
+  font-size: 0.9rem;
+}
+
+.book-card__details {
+  display: flex;
+  gap: 1.25rem;
+  margin: 1rem 0;
+}
+
+.book-card__details div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.book-card__details dt {
+  color: #748078;
+  font-size: 0.7rem;
+}
+
+.book-card__details dd {
+  margin: 0;
+  color: #263a30;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.book-card__content .button {
+  margin-top: auto;
+}
+
+@media (max-width: 520px) {
+  .book-card {
+    min-height: 210px;
+  }
+
+  .book-card__cover {
+    width: 76px;
+    flex-basis: 76px;
+  }
+
+  .book-card__content {
+    padding: 1rem;
+  }
+}
