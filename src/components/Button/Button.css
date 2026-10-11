@@ -27,17 +27,17 @@
 }
 
 .button--primary {
-  background: #176b55;
+  background: #005b41;
   color: #fff;
 }
 
 .button--primary:hover:not(:disabled) {
-  background: #105541;
+  background: #1b4d3e;
 }
 
 .button--secondary {
   background: #e8f1ed;
-  color: #176b55;
+  color: #005b41;
 }
 
 .button--secondary:hover:not(:disabled) {

@@ -1,7 +1,8 @@
-import CatalogPage from '@/pages/CatalogPage'
+import HomePage from '@/pages/HomePage'
+import './App.css'
 
 function App() {
-  return <CatalogPage />
+  return <HomePage />
 }
 
 export default App

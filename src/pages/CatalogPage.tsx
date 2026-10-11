@@ -5,36 +5,36 @@ import type { Book } from '@/types/book'
 
 const initialBooks: Book[] = [
   {
-    id: 'book-1',
+    id: 1,
     title: 'Тигролови',
     author: 'Іван Багряний',
-    genre: 'Українська класика',
+    genre: 'УКРАЇНСЬКА КЛАСИКА',
     year: 1944,
-    availableCopies: 3,
+    available: 3,
   },
   {
-    id: 'book-2',
+    id: 2,
     title: 'Місто',
-    author: 'Валер’ян Підмогильний',
-    genre: 'Роман',
+    author: "Валер'ян Підмогильний",
+    genre: 'РОМАН',
     year: 1928,
-    availableCopies: 2,
+    available: 2,
   },
   {
-    id: 'book-3',
+    id: 3,
     title: 'Кобзар',
     author: 'Тарас Шевченко',
-    genre: 'Поезія',
+    genre: 'ПОЕЗІЯ',
     year: 1840,
-    availableCopies: 4,
+    available: 4,
   },
   {
-    id: 'book-4',
+    id: 4,
     title: 'Лісова пісня',
     author: 'Леся Українка',
-    genre: 'Драма-феєрія',
+    genre: 'ДРАМА-ФЕЄРІЯ',
     year: 1911,
-    availableCopies: 1,
+    available: 1,
   },
 ]
 
@@ -42,11 +42,14 @@ function CatalogPage() {
   const [books, setBooks] = useState(initialBooks)
   const [notice, setNotice] = useState('')
 
-  const reserveBook = (reservedBook: Book) => {
+  const reserveBook = (title: string) => {
+    const reservedBook = books.find((book) => book.title === title)
+    if (!reservedBook || reservedBook.available === 0) return
+
     setBooks((currentBooks) =>
       currentBooks.map((book) =>
-        book.id === reservedBook.id && book.availableCopies > 0
-          ? { ...book, availableCopies: book.availableCopies - 1 }
+        book.id === reservedBook.id && book.available > 0
+          ? { ...book, available: book.available - 1 }
           : book,
       ),
     )

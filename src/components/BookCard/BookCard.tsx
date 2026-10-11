@@ -4,11 +4,11 @@ import './BookCard.css'
 
 interface BookCardProps {
   book: Book
-  onReserve: (book: Book) => void
+  onReserve: (title: string) => void
 }
 
 function BookCard({ book, onReserve }: BookCardProps) {
-  const isAvailable = book.availableCopies > 0
+  const isAvailable = book.available > 0
 
   return (
     <article className="book-card">
@@ -26,12 +26,12 @@ function BookCard({ book, onReserve }: BookCardProps) {
           </div>
           <div>
             <dt>Доступно примірників</dt>
-            <dd>{book.availableCopies}</dd>
+            <dd>{book.available}</dd>
           </div>
         </dl>
         <Button
           label={isAvailable ? 'Забронювати' : 'Немає в наявності'}
-          onClick={() => onReserve(book)}
+          onClick={() => onReserve(book.title)}
           variant="primary"
           disabled={!isAvailable}
         />
