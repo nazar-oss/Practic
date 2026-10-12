@@ -1,4 +1,5 @@
 import Button from '@/components/Button/Button'
+import { useBorrow } from '@/context/BorrowContext'
 import type { Book } from '@/types/book'
 import './BookCard.css'
 
@@ -8,6 +9,8 @@ interface BookCardProps {
 }
 
 function BookCard({ book, onReserve }: BookCardProps) {
+  const { addBorrow, isBookReserved } = useBorrow()
+  const isReserved = isBookReserved(book.id)
   const isAvailable = book.available > 0
 
   return (
@@ -30,10 +33,19 @@ function BookCard({ book, onReserve }: BookCardProps) {
           </div>
         </dl>
         <Button
-          label={isAvailable ? 'Забронювати' : 'Немає в наявності'}
-          onClick={() => onReserve(book.title)}
+          label={
+            isReserved
+              ? 'Заброньовано'
+              : isAvailable
+                ? 'Забронювати'
+                : 'Немає в наявності'
+          }
+          onClick={() => {
+            addBorrow(book)
+            onReserve(book.title)
+          }}
           variant="primary"
-          disabled={!isAvailable}
+          disabled={!isAvailable || isReserved}
         />
       </div>
     </article>

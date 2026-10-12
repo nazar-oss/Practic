@@ -44,6 +44,15 @@
   font-size: 0.85rem;
 }
 
+.catalog-reservation-count {
+  border-radius: 999px;
+  background: #e8f1ed;
+  color: #15503d;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.55rem 0.85rem;
+}
+
 .catalog-hero {
   display: flex;
   min-height: 360px;
@@ -163,6 +172,37 @@
   font-size: 0.9rem;
 }
 
+.catalog-search {
+  display: grid;
+  max-width: 460px;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: #53675c;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.catalog-search input {
+  min-height: 44px;
+  border: 1px solid #cbd8d0;
+  border-radius: 10px;
+  background: #fff;
+  color: #263a30;
+  font: inherit;
+  font-weight: 400;
+  padding: 0.65rem 0.8rem;
+}
+
+.catalog-search input:focus-visible {
+  outline: 2px solid #176b55;
+  outline-offset: 2px;
+}
+
+.catalog-empty {
+  color: #748078;
+}
+
 .catalog-notice {
   margin: 0 0 1.25rem;
   border-radius: 12px;
@@ -216,6 +256,11 @@
 
   .catalog-header__caption {
     display: none;
+  }
+
+  .catalog-reservation-count {
+    font-size: 0.75rem;
+    padding: 0.45rem 0.6rem;
   }
 
   .catalog-hero {

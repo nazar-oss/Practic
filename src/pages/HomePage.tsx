@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import BookCard from '@/components/BookCard/BookCard'
 import Button from '@/components/Button/Button'
+import { useBorrow } from '@/context/BorrowContext'
 import type { Book } from '@/types/book'
 
 const books: Book[] = [
@@ -38,6 +40,15 @@ const books: Book[] = [
 ]
 
 function HomePage() {
+  const [searchQuery, setSearchQuery] = useState('')
+  const { totalReserved } = useBorrow()
+  const normalizedSearchQuery = searchQuery.trim().toLocaleLowerCase('uk')
+  const filteredBooks = books.filter((book) =>
+    `${book.title} ${book.author}`
+      .toLocaleLowerCase('uk')
+      .includes(normalizedSearchQuery),
+  )
+
   const handleReserveBook = (title: string) => {
     window.alert(`Книгу «${title}» успішно заброньовано!`)
   }
@@ -52,6 +63,9 @@ function HomePage() {
           <span>Книгосвіт</span>
         </a>
         <span className="catalog-header__caption">Електронна бібліотека</span>
+        <span className="catalog-reservation-count" role="status">
+          Заброньовано книг: {totalReserved}
+        </span>
       </header>
 
       <section className="catalog-hero">
@@ -90,10 +104,19 @@ function HomePage() {
             <p className="catalog-eyebrow">Добірка бібліотеки</p>
             <h2>Каталог книг</h2>
           </div>
-          <p className="catalog-count">{books.length} книги у добірці</p>
+          <p className="catalog-count">{filteredBooks.length} книги у добірці</p>
         </div>
+        <label className="catalog-search">
+          <span>Пошук за назвою або автором</span>
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Наприклад, «Тигролови»"
+          />
+        </label>
         <div className="book-grid">
-          {books.map((book) => (
+          {filteredBooks.map((book) => (
             <BookCard
               key={book.id}
               book={book}
@@ -101,6 +124,11 @@ function HomePage() {
             />
           ))}
         </div>
+        {filteredBooks.length === 0 && (
+          <p className="catalog-empty" role="status">
+            За вашим запитом книг не знайдено.
+          </p>
+        )}
       </section>
 
       <footer className="catalog-footer">
