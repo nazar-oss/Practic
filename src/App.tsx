@@ -1,7 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, MotionConfig } from 'framer-motion'
 
-// Імпорт сторінок через default (без фігурних дужок):
 import HomePage from '@/pages/HomePage'
 import CatalogPage from '@/pages/CatalogPage'
 import BookDetailPage from '@/pages/BookDetailPage'
