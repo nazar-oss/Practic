@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import BookCard from '@/components/BookCard/BookCard'
 import Button from '@/components/Button/Button'
+import { PageWrapper } from '@/components/PageWrapper'
 import { useBorrow } from '@/context/BorrowContext'
 import type { Book } from '@/types/book'
 
@@ -54,6 +56,7 @@ function HomePage() {
   }
 
   return (
+    <PageWrapper>
     <main className="catalog-page">
       <header className="catalog-header">
         <a className="catalog-brand" href="/" aria-label="Електронна бібліотека">
@@ -108,11 +111,13 @@ function HomePage() {
         </div>
         <label className="catalog-search">
           <span>Пошук за назвою або автором</span>
-          <input
+          <motion.input
             type="search"
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
             placeholder="Наприклад, «Тигролови»"
+            whileFocus={{ scale: 1.01 }}
+            transition={{ duration: 0.16 }}
           />
         </label>
         <div className="book-grid">
@@ -135,6 +140,7 @@ function HomePage() {
         Система управління електронною бібліотекою та каталогом книг
       </footer>
     </main>
+    </PageWrapper>
   )
 }
 

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import Button from '@/components/Button/Button'
 import { useBorrow } from '@/context/BorrowContext'
 import type { Book } from '@/types/book'
@@ -14,7 +15,11 @@ function BookCard({ book, onReserve }: BookCardProps) {
   const isAvailable = book.available > 0
 
   return (
-    <article className="book-card">
+    <motion.article
+      className="book-card"
+      layout
+      whileHover={{ y: -6 }}
+    >
       <div className="book-card__cover" aria-hidden="true">
         <span className="book-card__cover-mark">ЧИТАЙ</span>
       </div>
@@ -48,7 +53,7 @@ function BookCard({ book, onReserve }: BookCardProps) {
           disabled={!isAvailable || isReserved}
         />
       </div>
-    </article>
+    </motion.article>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import BookCard from '@/components/BookCard/BookCard'
 import Button from '@/components/Button/Button'
+import { PageWrapper } from '@/components/PageWrapper'
 import type { Book } from '@/types/book'
 
 const initialBooks: Book[] = [
@@ -57,6 +58,7 @@ function CatalogPage() {
   }
 
   return (
+    <PageWrapper>
     <main className="catalog-page">
       <header className="catalog-header">
         <a className="catalog-brand" href="/" aria-label="Електронна бібліотека">
@@ -119,6 +121,7 @@ function CatalogPage() {
         Система управління електронною бібліотекою та каталогом книг
       </footer>
     </main>
+    </PageWrapper>
   )
 }
 
