@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import BookCard from '@/components/BookCard/BookCard'
 import Button from '@/components/Button/Button'
+import Modal from '@/components/Modal/Modal'
 import { PageWrapper } from '@/components/PageWrapper'
 import type { Book } from '@/types/book'
 
@@ -42,9 +43,10 @@ const initialBooks: Book[] = [
 function CatalogPage() {
   const [books, setBooks] = useState(initialBooks)
   const [notice, setNotice] = useState('')
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null)
 
-  const reserveBook = (title: string) => {
-    const reservedBook = books.find((book) => book.title === title)
+  const reserveBook = (bookToReserve: Book) => {
+    const reservedBook = books.find((book) => book.id === bookToReserve.id)
     if (!reservedBook || reservedBook.available === 0) return
 
     setBooks((currentBooks) =>
@@ -55,6 +57,7 @@ function CatalogPage() {
       ),
     )
     setNotice(`Книгу «${reservedBook.title}» додано до ваших бронювань.`)
+    setSelectedBook(reservedBook)
   }
 
   return (
@@ -120,6 +123,18 @@ function CatalogPage() {
       <footer className="catalog-footer">
         Система управління електронною бібліотекою та каталогом книг
       </footer>
+      <Modal
+        isOpen={!!selectedBook}
+        onClose={() => setSelectedBook(null)}
+        title="Статус бронювання"
+      >
+        <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+          <p style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>
+            Книгу <strong>«{selectedBook?.title}»</strong> успішно заброньовано!
+          </p>
+          <p style={{ color: '#666' }}>Автор: {selectedBook?.author}</p>
+        </div>
+      </Modal>
     </main>
     </PageWrapper>
   )

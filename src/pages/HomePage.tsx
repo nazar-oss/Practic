@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import BookCard from '@/components/BookCard/BookCard'
 import Button from '@/components/Button/Button'
+import Modal from '@/components/Modal/Modal'
 import { PageWrapper } from '@/components/PageWrapper'
 import { useBorrow } from '@/context/BorrowContext'
 import type { Book } from '@/types/book'
@@ -43,6 +44,7 @@ const books: Book[] = [
 
 function HomePage() {
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null)
   const { totalReserved } = useBorrow()
   const normalizedSearchQuery = searchQuery.trim().toLocaleLowerCase('uk')
   const filteredBooks = books.filter((book) =>
@@ -51,8 +53,8 @@ function HomePage() {
       .includes(normalizedSearchQuery),
   )
 
-  const handleReserveBook = (title: string) => {
-    window.alert(`Книгу «${title}» успішно заброньовано!`)
+  const handleReserveBook = (book: Book) => {
+    setSelectedBook(book)
   }
 
   return (
@@ -139,6 +141,18 @@ function HomePage() {
       <footer className="catalog-footer">
         Система управління електронною бібліотекою та каталогом книг
       </footer>
+      <Modal
+        isOpen={!!selectedBook}
+        onClose={() => setSelectedBook(null)}
+        title="Статус бронювання"
+      >
+        <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+          <p style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>
+            Книгу <strong>«{selectedBook?.title}»</strong> успішно заброньовано!
+          </p>
+          <p style={{ color: '#666' }}>Автор: {selectedBook?.author}</p>
+        </div>
+      </Modal>
     </main>
     </PageWrapper>
   )

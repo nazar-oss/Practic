@@ -56,7 +56,7 @@ function Modal({ isOpen, onClose, children, title }: ModalProps) {
               onClick={onClose}
               aria-label="Закрити діалогове вікно"
             >
-              ×
+              ✕
             </button>
             {title && (
               <h2 className="modal__title" id={titleId}>

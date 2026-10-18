@@ -6,7 +6,7 @@ import './BookCard.css'
 
 interface BookCardProps {
   book: Book
-  onReserve: (title: string) => void
+  onReserve: (book: Book) => void
 }
 
 function BookCard({ book, onReserve }: BookCardProps) {
@@ -47,7 +47,7 @@ function BookCard({ book, onReserve }: BookCardProps) {
           }
           onClick={() => {
             addBorrow(book)
-            onReserve(book.title)
+            onReserve(book)
           }}
           variant="primary"
           disabled={!isAvailable || isReserved}
